@@ -1,0 +1,25 @@
+﻿
+
+<table>
+    <tr>
+        <td>Name</td>
+        <td>Address</td>
+        <td>id</td>
+    </tr>
+    @if (Model != null) //need this because nullrefexception when using search button, model not referenced yet
+    {
+        @foreach (var cust in Model) //model is a ready made variable
+        {
+            <tr>
+                <td>@cust.customerName</td>
+                <td>@cust.address</td>
+                <td>@cust.id</td>
+                <td>@Html.ActionLink("DeleteRecord", "Delete", "Customer", new { id = cust.id })</td>
+                <td>@Html.ActionLink("UpdateRecord", "Update", "Customer", new { id = cust.id })</td>
+            </tr>
+
+        }
+    }
+
+
+</table>
