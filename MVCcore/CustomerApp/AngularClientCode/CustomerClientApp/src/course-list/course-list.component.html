@@ -1,0 +1,76 @@
+
+<div class="bg">
+    <br>
+  <div class="center">
+      <form [formGroup]="courseObj.formGroup">
+        
+        <div class="wrapper">
+          <label>Id :- </label>
+          <input type="text" [(ngModel)]="courseObj.id" [ngModelOptions]="{standalone: true}">
+      
+          <label>Name :- </label>
+          <input formControlName="courseNameControl" type="text" [(ngModel)]="courseObj.courseName" /> 
+  
+          <!-- <label>Product :- </label>
+          <input type="text" [(ngModel)]="productObj.name" [ngModelOptions]="{standalone: true}">
+          
+          <input type="button" value="Add products" (click)="AddProduct()" class="btn btn-success"> -->
+          
+        </div>
+        
+        <!-- <ul>
+          <li *ngFor="let temp of courseObj.products">
+            <td>{{temp.name}}</td>
+          </li>
+        </ul> -->
+  <br>
+        <input [disabled]="!(courseObj.formGroup.valid)" (click)="AddtoServer()" type="button" value="Add Server" class="btn btn-success"/>
+        <input type="button" (click)="GetCoursesfromServer()" value="GetList" class="btn btn-primary">
+        <input type="button" (click)="SearchfromServer(courseObj.courseName)" value="SearchList" class="btn btn-info">
+        <input type="button" (click)="EditInServer()" value="EditList" class="btn btn-warning">
+        <input type="button" (click)="DeleteInServer(courseObj.id)" value="DeleteRecord" class="btn btn-danger">
+        <!--client side validations-->
+      
+    </form>
+  </div>
+
+  <br>
+
+
+<table class="table table-striped">
+    <tr *ngFor="let temp2 of errorList">
+      <td>{{temp2}}</td>
+    </tr>
+  </table>
+  
+  
+  
+  <table class="table "> 
+    <thead class="thead-dark ">
+      <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let temp of courseList" class="table-primary">
+      <td>{{temp.id}}</td>
+      <td><img [src]="'https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Flag_of_Singapore.svg/510px-Flag_of_Singapore.svg.png'" class="mr-2" style="width: 20px">
+        {{temp.courseName}}</td>
+      <!-- <td>{{temp.address}}</td> 
+      <td>
+        <table>
+          <tr *ngFor="let temp2 of temp.products">
+            <td>{{temp2.name}}</td>
+          </tr>
+        </table>
+      </td>-->
+      <td><input type="button" (click)="Select(temp)" value="edit" class="btn btn-warning" ></td>
+      <td><input type="button" (click)="DeleteInServer(temp.id)" value="delete" class="btn btn-danger"></td>
+    </tr>
+  </tbody>
+  </table>
+
+</div>

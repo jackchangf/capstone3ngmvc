@@ -1,0 +1,21 @@
+<div class="center">
+    <form action="">
+        <h1 class="center">Login</h1>
+        <div class="wrapper">
+            <label>Username: </label>
+            <input type="text" [(ngModel)]="userObj.userName" name="userName">
+
+            <label>Password: </label>
+            <input type="password" [(ngModel)]="userObj.password" name="password"/> 
+
+            <input type="button" value="Login" class="btn btn-success" (click)="Login()">
+            
+        </div>
+    </form>
+</div>
+
+<!-- <form class="center" action="">
+    User name: <input type="text"/> <br>
+    Password: <input type="password"/> <br>
+    <input type="button" value="Login"/> 
+</form> -->

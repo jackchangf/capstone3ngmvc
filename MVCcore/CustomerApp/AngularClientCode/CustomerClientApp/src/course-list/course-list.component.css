@@ -1,0 +1,30 @@
+form {
+  background: rgba(255, 238, 238, 0.7);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
+  padding: 20px;
+}
+
+div.wrapper {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-gap: 10px;
+}
+
+div.wrapper label {
+  text-align: center;
+  color: whitesmoke;
+  background: linear-gradient(to right,
+      #ff512f,
+      black);
+}
+
+/* .bg {
+  background: url('/assets/cp1.jpg') no-repeat center / cover;
+} */
+
+table {
+  margin: auto;
+  width: 75%;
+  text-align: center;
+  font-family: --Lobster;
+}

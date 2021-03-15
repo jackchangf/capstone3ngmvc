@@ -25,12 +25,17 @@ namespace CustomerApp.DbContextCustomer
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //modelBuilder.Entity<Customer>().Ignore(c => c.guid); //either use this fluent method or use attributes in the model class [NotMapped]
+
             modelBuilder.Entity<Customer>().ToTable("tblCustomer");
 
             modelBuilder.Entity<Product>().ToTable("tblProduct");
+
+            modelBuilder.Entity<Course>().ToTable("tblCourse");
         }
 
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Course> Courses { get; set; }
     }
 }

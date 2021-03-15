@@ -1,1 +1,50 @@
 /* You can add global styles to this file, and also import other style files */
+/*google font*/
+@import url('https://fonts.googleapis.com/css2?family=Acme&family=Lobster&family=Patua+One&family=Rubik:wght@300&family=Sniglet&display=swap');
+
+:root {
+  --Snigle-font: "Sniglet", cursive;
+  --Rubik: "Rubik", cursive;
+  --Patua: "Patua One", cursive;
+  --Lobster: "Lobster", cursive;
+  --light-black: #2e2c2caf;
+  --bggradient: linear-gradient(to bottom,
+      #dd2476,
+      #ff512f);
+  --light-gray: rgba(255, 255, 255, 0.7);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* img {
+  border: 3px solid white;
+  margin-top: 5em;
+  margin-left: 2em;
+  width: 120%;
+} */
+
+
+/*content*/
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+/* body {
+  /* background-color: rgb(255, 246, 248); */
+/* background:
+    linear-gradient(#234 0px, transparent 396px) */
+
+/* background: -moz-linear-gradient(-45deg, rgba(255, 246, 248, 0) 0%, rgba(255, 219, 227, 0.65) 100%); 
+
+
+
+}*/
+
+*/ .errorMessage {
+  color: red;
+}

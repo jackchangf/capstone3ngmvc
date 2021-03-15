@@ -15,9 +15,40 @@ namespace CustomerApp.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.12")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("ProductVersion", "5.0.3")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("CourseCustomer", b =>
+                {
+                    b.Property<int>("coursesid")
+                        .HasColumnType("int");
+
+                    b.Property<int>("customersid")
+                        .HasColumnType("int");
+
+                    b.HasKey("coursesid", "customersid");
+
+                    b.HasIndex("customersid");
+
+                    b.ToTable("CourseCustomer");
+                });
+
+            modelBuilder.Entity("CustomerApp.Models.Course", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("courseName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("tblCourse");
+                });
 
             modelBuilder.Entity("CustomerApp.Models.Customer", b =>
                 {
@@ -60,11 +91,31 @@ namespace CustomerApp.Migrations
                     b.ToTable("tblProduct");
                 });
 
+            modelBuilder.Entity("CourseCustomer", b =>
+                {
+                    b.HasOne("CustomerApp.Models.Course", null)
+                        .WithMany()
+                        .HasForeignKey("coursesid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CustomerApp.Models.Customer", null)
+                        .WithMany()
+                        .HasForeignKey("customersid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("CustomerApp.Models.Product", b =>
                 {
                     b.HasOne("CustomerApp.Models.Customer", null)
                         .WithMany("products")
                         .HasForeignKey("Customerid");
+                });
+
+            modelBuilder.Entity("CustomerApp.Models.Customer", b =>
+                {
+                    b.Navigation("products");
                 });
 #pragma warning restore 612, 618
         }

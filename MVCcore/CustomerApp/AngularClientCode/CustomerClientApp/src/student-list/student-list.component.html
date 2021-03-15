@@ -1,0 +1,155 @@
+
+<div class="bg">
+  <br>
+<div class="center">
+    <form [formGroup]="customerObj.formGroup">
+      
+      <div class="wrapper">
+        <label>Id :- </label>
+        <input type="text" [(ngModel)]="customerObj.id" [ngModelOptions]="{standalone: true}">
+    
+        <label>Name :- </label>
+        <input formControlName="customerNameControl" type="text" [(ngModel)]="customerObj.customerName" /> 
+    
+        <label>Courses :- </label>
+        <mat-form-field appearance="fill">
+          <mat-label>Courses</mat-label>
+          <mat-select [(value)]="selectedCourseId">
+              <mat-option *ngFor="let temp of courseList" [value]="temp.id">
+                {{temp.courseName}}
+              </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <label>AddCourses: </label>
+        <input type="button" value="Add course" (click)="AddCourse()" class="btn btn-success">
+
+        <label>CourseAdded: </label>
+        <ul>
+          <li *ngFor="let temp of customerObj.courses">
+            <table>
+              <tr>
+                <td>{{temp.id}}</td>
+                <td>{{temp.courseName}}</td>
+              </tr>
+            </table>
+          </li>
+        </ul>
+
+        <label>Address :- </label>
+        <input formControlName="addressControl" type="text"  [(ngModel)]="customerObj.address" /> 
+
+        <label>Product :- </label>
+        <input type="text" [(ngModel)]="productObj.name" [ngModelOptions]="{standalone: true}">
+        
+        <input type="button" value="Add products" (click)="AddProduct()" class="btn btn-success">
+        
+      </div>
+      
+
+      <ul>
+        <li *ngFor="let temp of customerObj.products">
+          <td>{{temp.name}}</td>
+        </li>
+      </ul>
+<br>
+      
+      <!--[ngModelOptions]="{standalone: true}" this is for standalone with no validation  -->
+      <!--
+      <div>
+      id :- <input type="text" [(ngModel)]="customerObj.id" [ngModelOptions]="{standalone: true}"><br /> 
+      </div>
+      <br>
+    
+      <div>
+      Name :- <input formControlName="customerNameControl" type="text" [(ngModel)]="customerObj.customerName" />    
+      <span class="errorMessage" *ngIf="customerObj.formGroup.controls['customerNameControl'].dirty" [hidden]="!(customerObj.formGroup.controls['customerNameControl'].hasError('required'))"> Name is required</span>
+      <span class="errorMessage" *ngIf="customerObj.formGroup.controls['customerNameControl'].dirty" [hidden]="!(customerObj.formGroup.controls['customerNameControl'].hasError('pattern'))"> Name should be of length 3 to 10</span>
+      </div>
+      <br>
+    
+      <div>
+      Address :- <input formControlName="addressControl" type="text"  [(ngModel)]="customerObj.address" /> 
+      <span class="errorMessage" *ngIf="customerObj.formGroup.controls['addressControl'].dirty" [hidden]="!(customerObj.formGroup.controls['addressControl'].hasError('required'))"> Address is required</span>
+      </div>
+      <br>
+
+      <div>
+      product name: <input type="text" [(ngModel)]="productObj.name">
+      <input type="button" value="Add products" (click)="AddProduct()">      
+      </div>
+      <br>
+      -->
+<br>
+      <input (click)="Add()" type="button" value="Add" class="btn btn-secondary"/>
+      <input [disabled]="!(customerObj.formGroup.valid)" (click)="AddtoServer()" type="button" value="Add Server" class="btn btn-success"/>
+      <input type="button" (click)="GetfromServer()" value="GetList" class="btn btn-primary">
+      <input type="button" (click)="SearchfromServer(customerObj.customerName)" value="SearchList" class="btn btn-info">
+      <input type="button" (click)="EditInServer()" value="EditList" class="btn btn-warning">
+      <input type="button" (click)="DeleteInServer(customerObj.id)" value="DeleteRecord" class="btn btn-danger">
+      <input type="button" (click)="getjsontest()" value="GetJson" class="btn btn-dark">
+      <!--client side validations-->
+    
+  </form>
+</div>
+
+<p>You selected: {{selectedCourseId}}</p>
+
+        <!-- <ul>
+          <li *ngFor="let temp of courseList">
+            <td>{{temp.courseName}}</td>
+          </li>
+        </ul> -->
+
+    <br />
+    {{customerObj.customerName}}<br>
+    {{customerObj.address}}
+   
+    <!-- {{errorM}} -->
+    
+    <table class="table table-striped">
+      <tr *ngFor="let temp2 of errorList">
+        <td>{{temp2}}</td>
+      </tr>
+    </table>
+    
+    
+    
+    <table class="table "> 
+      <thead class="thead-dark ">
+        <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Products</th>
+        <th>Courses</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let temp of customerList" class="table-primary">
+        <td>{{temp.id}}</td>
+        <td><img [src]="'https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Flag_of_Singapore.svg/510px-Flag_of_Singapore.svg.png'" class="mr-2" style="width: 20px">
+          {{temp.customerName}}</td>
+        <td>{{temp.address}}</td>
+        <td>
+          <table>
+            <tr *ngFor="let temp2 of temp.products">
+              <td>{{temp2.name}}</td>
+            </tr>
+          </table>
+        </td>
+        <td>
+          <table>
+            <tr *ngFor="let temp3 of temp.courses">
+              <td>{{temp3.courseName}}</td>
+            </tr>
+          </table>
+        </td>
+        <td><input type="button" (click)="Select(temp)" value="edit" class="btn btn-warning" ></td>
+        <td><input type="button" (click)="DeleteInServer(temp.id)" value="delete" class="btn btn-danger"></td>
+      </tr>
+    </tbody>
+    </table>
+  </div>

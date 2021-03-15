@@ -13,13 +13,26 @@ namespace CustomerApp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
+        //public HomeController(ILogger<HomeController> logger, Customer obj, Customer obj1)
+        //{
+        //    //if 2 different customer instances are injected, the guids will be different
+        //    _logger = logger;
+        //}
+
+        //using interface as oppose to above
+        //public HomeController(ILogger<HomeController> logger, ICustomer obj)
         public HomeController(ILogger<HomeController> logger)
         {
+            //if 2 different customer instances are injected, the guids will be different
             _logger = logger;
         }
 
         public IActionResult Index()
         {
+            //set the current time to viewdata
+            ViewData["X1"] = DateTime.Now;
+
+            TempData["X2"] = DateTime.Now;
             return View();
         }
 
