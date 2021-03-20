@@ -49,6 +49,6 @@ mat-select-value {
   background-color: blue;
 } */
 
-/deep/ .mat-form-field-appearance-fill .mat-form-field-flex {
+/* /deep/ .mat-form-field-appearance-fill .mat-form-field-flex {
   background-color: black;
-}
+} */

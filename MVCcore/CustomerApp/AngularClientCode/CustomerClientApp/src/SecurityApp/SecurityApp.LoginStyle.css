@@ -13,7 +13,7 @@ div.wrapper {
 div.wrapper label {
   text-align: center;
   color: whitesmoke;
-  background: linear-gradient(to right,
+  background: linear-gradient(to bottom,
       #ff512f,
-      black);
+      #dd2476);
 }

@@ -12,7 +12,8 @@ export class JwtInterceptor implements HttpInterceptor {
         // add authorization header with jwt token if available, intercepts all http request before sent to server
         request = request.clone({
             setHeaders: {
-                Authorization: `Bearer ${this.global.token}`
+                //Authorization: `Bearer ${this.global.token}`
+                Authorization: `Bearer ${localStorage.getItem('token')}`
             }
         });
         return next.handle(request);

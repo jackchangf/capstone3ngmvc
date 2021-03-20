@@ -29,7 +29,9 @@ namespace CustomerApp.Controllers
 
             //return Ok(courses);
 
-            return await _context.Courses.ToListAsync();
+            //return await _context.Courses.ToListAsync();
+            return Ok(await _context.Courses.Include(s => s.customers).ThenInclude(p => p.products).ToListAsync());
+
         }
 
         // GET: api/Courses/5
@@ -74,9 +76,7 @@ namespace CustomerApp.Controllers
                 }
             }
 
-            List<Course> courses = _context.Courses.ToList<Course>();
-
-            return StatusCode(StatusCodes.Status200OK, courses);
+            return Ok(await _context.Courses.Include(s => s.customers).ThenInclude(p => p.products).ToListAsync());
         }
 
         // POST: api/Courses

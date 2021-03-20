@@ -25,7 +25,7 @@ namespace CustomerApp.Controllers
         {
             custDbContext = _custDbContext;
 
-            string str = configuration["ConnString"];
+            //string str = configuration["ConnString"];
         }
 
         public IActionResult AddScreen() //display the adding screen

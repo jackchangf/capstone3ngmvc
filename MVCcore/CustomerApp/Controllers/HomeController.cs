@@ -27,12 +27,23 @@ namespace CustomerApp.Controllers
             _logger = logger;
         }
 
+        [ValidateAntiForgeryToken]
+        public IActionResult Submit(Customer obj)
+        {
+            return Ok(obj);
+        }
+
         public IActionResult Index()
         {
             //set the current time to viewdata
-            ViewData["X1"] = DateTime.Now;
+            //ViewData["X1"] = DateTime.Now;
 
-            TempData["X2"] = DateTime.Now;
+            //TempData["X2"] = DateTime.Now;
+            return View();
+        }
+
+        public IActionResult Index1()
+        {
             return View();
         }
 

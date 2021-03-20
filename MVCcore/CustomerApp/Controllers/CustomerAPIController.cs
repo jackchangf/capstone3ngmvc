@@ -1,5 +1,6 @@
 ﻿using CustomerApp.DbContextCustomer;
 using CustomerApp.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,6 +19,7 @@ namespace CustomerApp.Controllers
     [Route("api/[controller]")]
     [ApiController]
     //[Authorize] //this will make the class secured, can put on methods too, this is for jwt token
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class CustomerAPIController : ControllerBase
     {
         CustomerDbContext custDbContext = null; //di ioc
@@ -26,10 +28,10 @@ namespace CustomerApp.Controllers
         {
             custDbContext = _custDbContext;
 
-            string str = configuration["ConnString"];
+            //string str = configuration["ConnString"];
         }
 
-        // GET: api/<CustomerAPIController>
+        // GET: api/CustomerAPI
         [HttpGet]
         public async Task<ActionResult> Get() //iactionresult is data + statuscode, ienumerable is just data
         {
@@ -244,6 +246,19 @@ namespace CustomerApp.Controllers
 
         }
 
+        // PUT: api/Courses/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> Put(Customer obj)
+        //{
+        //    custDbContext.Entry(obj).State = EntityState.Modified; //does not work for products or courses 
+
+        //    await custDbContext.SaveChangesAsync();
+
+        //    return Ok(await custDbContext.Customers.Include(p => p.products).Include(c => c.courses).ToListAsync());
+        //}
+
+
         // DELETE api/<CustomerAPIController>/5
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
@@ -258,8 +273,10 @@ namespace CustomerApp.Controllers
             custDbContext.Customers.Remove(cust1); //after removing products then delete from list
             await custDbContext.SaveChangesAsync();
 
-            List<Customer> custs = custDbContext.Customers.Include(s => s.products).ToList<Customer>();
-            return StatusCode(StatusCodes.Status200OK, custs);
+            //List<Customer> custs = custDbContext.Customers.Include(s => s.products).ToList<Customer>();
+            //return StatusCode(StatusCodes.Status200OK, custs);
+            return Ok(await custDbContext.Customers.Include(p => p.products).Include(c => c.courses).ToListAsync());
+
         }
     }
 }

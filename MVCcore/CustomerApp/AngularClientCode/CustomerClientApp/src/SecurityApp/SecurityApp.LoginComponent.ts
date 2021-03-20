@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Global } from "src/Common/Common.Global";
 import { User } from "./SecurityApp.LoginModel";
@@ -10,14 +10,21 @@ import { User } from "./SecurityApp.LoginModel";
     templateUrl: './SecurityApp.Login.html',
     styleUrls: ['./SecurityApp.LoginStyle.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
+
+    userObj: User = new User();
+
     constructor(public httpObj: HttpClient,
         public globalObj: Global,
         public routeObj: Router) {
 
     }
 
-    userObj: User = new User();
+    ngOnInit(): void {
+
+    }
+
+
     Login() {
         // we will make a call to mvc to get token
         // alert(this.userObj.userName + " " + this.userObj.password);
@@ -32,12 +39,33 @@ export class LoginComponent {
     }
 
     success(res: any) {
-        this.globalObj.token = res.Value;
-
+        //this.globalObj.token = res.token;
+        localStorage.setItem('token', res.token);
+        this.GetUserProfile();
+        this.globalObj.isUserLoggedIn.next(true);
         //nav to student screen after login token
         this.routeObj.navigateByUrl('students');
     }
     error(res: any) {
         console.log(res);
+    }
+
+    GetUserProfile() {
+        var observable = this.httpObj.get(this.globalObj.userProfileUrl);
+
+        observable.subscribe(
+            res => this.SuccessObserver(res),
+            res => this.error(res)
+        )
+    }
+
+    SuccessObserver(res: any) {
+        // Put the object into storage
+        localStorage.setItem('userActive', JSON.stringify(res));
+
+        // Retrieve the object from storage
+        //var retrievedObject: any = localStorage.getItem('userActive');
+
+        this.globalObj.userActive.next(res);
     }
 }

@@ -1,0 +1,79 @@
+
+<div class="center">
+    <form [formGroup]="userObj.formGroup">
+      <h1 class="center">Register</h1>
+      <div class="wrapper">
+
+        <!-- <label>Id :- </label>
+        <input type="text" [(ngModel)]="userObj.id" [ngModelOptions]="{standalone: true}"> -->
+    
+        <label>First Name : </label>
+        <div>
+            <input formControlName="firstNameControl" type="text" [(ngModel)]="userObj.FirstName" /> 
+            <p class="errorMessage" *ngIf="userObj.formGroup.controls['firstNameControl'].dirty" [hidden]="!(userObj.formGroup.controls['firstNameControl'].hasError('required'))"> First Name is required</p>
+            <p class="errorMessage" *ngIf="userObj.formGroup.controls['firstNameControl'].dirty" [hidden]="!(userObj.formGroup.controls['firstNameControl'].hasError('pattern'))"> First Name should be of length 3 to 10</p>
+        </div>
+
+        <label>Last Name : </label>
+        <div>
+        <input formControlName="lastNameControl" type="text" [(ngModel)]="userObj.LastName" /> 
+        <p class="errorMessage" *ngIf="userObj.formGroup.controls['lastNameControl'].dirty" [hidden]="!(userObj.formGroup.controls['lastNameControl'].hasError('required'))"> Last Name is required</p>
+        <p class="errorMessage" *ngIf="userObj.formGroup.controls['lastNameControl'].dirty" [hidden]="!(userObj.formGroup.controls['lastNameControl'].hasError('pattern'))"> Last Name should be of length 3 to 10</p>
+        </div>
+
+        <label>User Name : </label>
+        <div>
+        <input formControlName="userNameControl" type="text" [(ngModel)]="userObj.UserName" /> 
+        <p class="errorMessage" *ngIf="userObj.formGroup.controls['userNameControl'].dirty" [hidden]="!(userObj.formGroup.controls['userNameControl'].hasError('required'))"> User Name is required</p>
+        <p class="errorMessage" *ngIf="userObj.formGroup.controls['userNameControl'].dirty" [hidden]="!(userObj.formGroup.controls['userNameControl'].hasError('pattern'))"> User Name should be of length 3 to 10</p>
+        </div>
+
+        <label>Password : </label>
+        <div>
+        <input formControlName="passwordControl" type="text" [(ngModel)]="userObj.Password" />
+        <p class="errorMessage" *ngIf="userObj.formGroup.controls['passwordControl'].dirty" [hidden]="!(userObj.formGroup.controls['passwordControl'].hasError('required'))"> Password is required</p>
+        </div>
+
+        <label>Email : </label>
+        <div>
+        <input formControlName="emailControl" type="text" [(ngModel)]="userObj.Email" />
+        <p class="errorMessage" *ngIf="userObj.formGroup.controls['emailControl'].dirty" [hidden]="!(userObj.formGroup.controls['emailControl'].hasError('required'))"> Email is required</p>
+        </div>  
+        
+      </div>
+      
+
+<br>
+      
+      <!--[ngModelOptions]="{standalone: true}" this is for standalone with no validation  -->
+      <!--
+      <div>
+      id :- <input type="text" [(ngModel)]="userObj.id" [ngModelOptions]="{standalone: true}"><br /> 
+      </div>
+      <br>
+    
+      <div>
+      Name :- <input formControlName="userNameControl" type="text" [(ngModel)]="userObj.customerName" />    
+      <span class="errorMessage" *ngIf="userObj.formGroup.controls['userNameControl'].dirty" [hidden]="!(userObj.formGroup.controls['userNameControl'].hasError('required'))"> Name is required</span>
+      <span class="errorMessage" *ngIf="userObj.formGroup.controls['userNameControl'].dirty" [hidden]="!(userObj.formGroup.controls['userNameControl'].hasError('pattern'))"> Name should be of length 3 to 10</span>
+      </div>
+      <br>
+    
+      <div>
+      Address :- <input formControlName="addressControl" type="text"  [(ngModel)]="userObj.address" /> 
+      <span class="errorMessage" *ngIf="userObj.formGroup.controls['addressControl'].dirty" [hidden]="!(userObj.formGroup.controls['addressControl'].hasError('required'))"> Address is required</span>
+      </div>
+      <br>
+
+      <div>
+      product name: <input type="text" [(ngModel)]="productObj.name">
+      <input type="button" value="Add products" (click)="AddProduct()">      
+      </div>
+      <br>
+      -->
+<br>
+      <input [disabled]="!(userObj.formGroup.valid)" (click)="RegistertoServer()" type="button" value="Register" class="btn btn-success"/>
+      <!--client side validations-->
+    
+  </form>
+</div>

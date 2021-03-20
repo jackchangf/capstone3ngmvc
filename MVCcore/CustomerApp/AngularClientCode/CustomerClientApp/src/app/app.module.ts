@@ -3,17 +3,29 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppComponent } from './CustomerApp.CreateComponent';
+import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
-import { LoginComponent } from 'src/SecurityApp/SecurityApp.LoginComponent';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+
+
 import { Global } from 'src/Common/Common.Global';
 import { JwtInterceptor } from 'src/Common/Common.Interceptor';
 import { MyAuthGuard } from 'src/Common/Common.AuthGuard';
+import { UserComponent } from './user/user.component';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
+// import { RouterModule, RoutesRecognized } from '@angular/router';
+
 
 @NgModule({
   declarations: [
@@ -21,7 +33,9 @@ import { MyAuthGuard } from 'src/Common/Common.AuthGuard';
     routingComponents,
     HeaderComponent,
     FooterComponent,
-    LoginComponent
+    UserComponent,
+    AdminPanelComponent,
+    ForbiddenComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,10 +43,15 @@ import { MyAuthGuard } from 'src/Common/Common.AuthGuard';
     HttpClientModule, //used for injections http
     ReactiveFormsModule, //used for formgroups validations
     NgbModule,
-    AppRoutingModule,
-    BrowserAnimationsModule, //used for routing
-    // RouterModule.forRoot(CustomerRoutes) //to apply to all 
-    MatSelectModule
+    AppRoutingModule,//used for routing
+    BrowserAnimationsModule, //used by angular mat
+    // RouterModule.forRoot(CustomerRoutes) //to apply to all
+    //RouterModule.forChild(routes),
+    MatSelectModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatNativeDateModule
   ],
   providers: [Global, MyAuthGuard,
     {

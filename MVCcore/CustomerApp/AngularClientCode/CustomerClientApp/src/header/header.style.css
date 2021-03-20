@@ -1,0 +1,83 @@
+header nav a.active {
+  background-color: black;
+  clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
+header,
+section {
+  overflow-x: hidden;
+}
+
+header a {
+  font-family: var(--Snigle-font);
+  font-size: 0.9em;
+  color: whitesmoke;
+}
+
+header {
+  background: #dd2476;
+  background: linear-gradient(to bottom,
+      #dd2476,
+      #ff512f);
+  /* background: linear-gradient(45deg, red, blue); */
+}
+
+header .nav-item:last-child {
+  padding-right: 10.5em;
+}
+
+header .nav-item {
+  padding: 0.9em;
+}
+
+header .navbar-brand {
+  padding-left: 8rem;
+}
+
+
+header .nav-link:hover {
+  color: black;
+}
+
+
+header .row .col-md-5 {
+  padding: 4.2vmin 1vmin;
+}
+
+header .row .col-md-7 {
+  padding: 22vmin 1vmin;
+  padding-bottom: 35vmin;
+  font-family: var(--Rubik);
+  color: white;
+}
+
+/*header .container {
+    background: url('../asset/cp1.jpg');
+    position: relative;
+    overflow: hidden;
+    background-repeat: no-repeat;
+  }*/
+header .container .col-md-7 h6 {
+  padding: 1vmin;
+  letter-spacing: 4px;
+}
+
+header .container .col-md-7 h1 {
+  font-size: 8vmin;
+  font-weight: bold;
+  padding: 0.1em 0em;
+}
+
+header .container .col-md-7 p {
+  padding: 1vmin 5vmin;
+}
+
+header .container .col-md-7 button {
+  border-radius: 30px;
+  font-weight: bold;
+}

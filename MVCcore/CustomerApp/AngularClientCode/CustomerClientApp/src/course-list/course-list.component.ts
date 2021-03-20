@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Customer, Product, Course } from "../CustomerApp/CustomerApp.CustomerModel"
+import { Customer, Product, Course } from "../app/app.model"
 import { HttpClient } from "@angular/common/http"
 import * as _ from "lodash"; //* means import all, it is old js framework
 import { Global } from 'src/Common/Common.Global';

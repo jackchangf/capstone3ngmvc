@@ -13,14 +13,12 @@ div.wrapper {
 div.wrapper label {
   text-align: center;
   color: whitesmoke;
-  background: linear-gradient(to right,
+  background: linear-gradient(to bottom,
       #ff512f,
-      black);
+      #dd2476);
 }
 
-/* .bg {
-  background: url('/assets/cp1.jpg') no-repeat center / cover;
-} */
+
 
 table {
   margin: auto;
@@ -28,3 +26,8 @@ table {
   text-align: center;
   font-family: --Lobster;
 }
+
+
+/* .bg {
+  background: url('/assets/cp1.jpg') no-repeat center / cover;
+}*/

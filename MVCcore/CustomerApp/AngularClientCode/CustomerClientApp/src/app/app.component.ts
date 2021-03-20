@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { Customer, Product } from "./CustomerApp.CustomerModel"
+import { Customer, Product } from "./app.model"
 import { HttpClient } from "@angular/common/http"
 import * as _ from "lodash"; //* means import all, it is old js framework
 import { Global } from 'src/Common/Common.Global';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './CustomerApp.Create.html',
-  styleUrls: ['./CustomerApp.Style.css']
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.style.css']
 })
 export class AppComponent {
   date: Date = new Date();

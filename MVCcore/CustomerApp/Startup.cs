@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,19 +36,32 @@ namespace CustomerApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+           
+
+            //for asp.net inbuilt identity
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<UserDbContext>()
+                .AddDefaultTokenProviders();
+
             //security code order is important add as first
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-              .AddJwtBearer(options =>
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme
+            //    x =>
+            //{
+            //    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            //}
+            ).AddJwtBearer(options =>
               {
                   options.TokenValidationParameters = new TokenValidationParameters
                   {
-                      ValidateIssuer = true,
-                      ValidateAudience = true,
+                      ValidateIssuer = false,
+                      ValidateAudience = false,
                       ValidateLifetime = true,
                       ValidateIssuerSigningKey = true,
-                      ValidIssuer = "Shiv",
-                      ValidAudience = "Shiv",
-                      IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["SecurityKey"].ToString()))
+                      //ValidIssuer = "Shiv",
+                      //ValidAudience = "Shiv",
+                      IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["SecurityKey"].ToString())) //security key in appsettings.json
                   };
 
               });
@@ -55,18 +71,28 @@ namespace CustomerApp
             //to solve cors problem
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
+                //builder.WithOrigins("http://localhost:4200")
                 builder.AllowAnyOrigin()
                        .AllowAnyMethod()
                        .AllowAnyHeader();
             }));
 
-           
+            
 
             //EF's way of injecting the connstring di ioc
             services.AddDbContext<CustomerDbContext>(options =>
             options
             //.UseLazyLoadingProxies() //for FK Navigation Microsoft.EntityFrameworkCore.Proxies
-            .UseSqlServer(Configuration["ConnString"]));
+            //.UseSqlServer(Configuration["ConnString"]));
+            .UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            //injecting the identityconn here
+            services.AddDbContext<UserDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection"));
+            });
+
+            
 
             //injects where customer is needed
             services.AddScoped<Customer>();
@@ -88,20 +114,26 @@ namespace CustomerApp
 
             //default code
             services.AddControllersWithViews();
-
-            //to disable auto conversion of pascal camel case
-            services.AddControllers()
-           .AddJsonOptions(opts =>  opts.JsonSerializerOptions.PropertyNamingPolicy = null);
+            //to disable auto conversion of pascal camel case, called below
+            //services.AddControllers()
+            //.AddJsonOptions(opts => opts.JsonSerializerOptions.PropertyNamingPolicy = null);
 
             //services.AddControllers().AddNewtonsoftJson(o =>
             //{
             //    o.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             //});
 
-            services.AddMvc(option => option.EnableEndpointRouting = false)
-                .SetCompatibilityVersion(CompatibilityVersion.Latest)
-                .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            //services.AddMvc(option => option.EnableEndpointRouting = false)
+            //    .SetCompatibilityVersion(CompatibilityVersion.Latest)
+            //    .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
+            services.AddControllers()
+                .AddNewtonsoftJson(options =>
+                {
+                    // Use the default property (Pascal) casing
+                    options.SerializerSettings.ContractResolver = new DefaultContractResolver();
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

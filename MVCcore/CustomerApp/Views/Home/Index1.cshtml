@@ -1,0 +1,45 @@
+﻿@*<form action="/Home/Submit" method=post>
+        <input type=text name="customerName" />
+        @Html.AntiForgeryToken()
+        <input type=submit value="Submit" />
+    </form>
+
+    @{ var untrustedData = "<script>alert('sss')</script>";
+    }
+    @untrustedData*@
+@*@Html.Raw(untrustedData)*@
+
+@using System.Text.Encodings.Web;
+@using System.Web
+@inject JavaScriptEncoder encoder;
+UI coming from your website
+<br />
+<form action="/Home/Submit" method=post>
+    <input type=text name="customerName" />
+    @Html.AntiForgeryToken()
+    <input type=submit value="Submit" />
+</form>
+@{ var untrustedData = "<script>alert('sss')</script>";
+}
+@{ var trustedData = encoder.Encode(untrustedData);
+
+}
+
+@*@{ 
+    var trustedData = HttpUtility.HtmlEncode(untrustedData);
+}*@
+
+@*@{System.Net.WebUtility.HtmlDecode(trustedData); }*@
+
+@{
+   var decodedData = HttpUtility.HtmlDecode(trustedData);
+}
+
+
+@decodedData
+
+@*@untrustedData*@
+@{ //@Html.Raw(untrustedData)
+}
+
+
