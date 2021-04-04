@@ -1,5 +1,5 @@
 # Website Preview
-Frontend: ANGULAR HTML CSS JS / Backend: ASP.NET Core 5.0 MVC EFcore / Database: MS SQL Server  
+Frontend: ANGULAR HTML CSS JS / Backend: ASP.NET Core 5.0 MVC EFcore REST API / Database: MS SQL Server  
 
 # Home Page
 ![Home](https://user-images.githubusercontent.com/76429727/113500161-6803cf80-954e-11eb-9358-b5228aea5d0a.png)
