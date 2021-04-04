@@ -18,3 +18,5 @@ Many-to-many CRUD operations linking to MS SQL DB on backend
 ![sql db diagram](https://user-images.githubusercontent.com/76429727/113500395-28d67e00-9550-11eb-9976-e62ab1c34d0c.png)
 ![sql db user diagram](https://user-images.githubusercontent.com/76429727/113500396-2a07ab00-9550-11eb-82ef-e010be211b43.png)
 
+
+All copyrights belong to their respective owners
